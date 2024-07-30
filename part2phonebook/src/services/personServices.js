@@ -1,22 +1,23 @@
 import axios from "axios"
+const baseURL = "/api/persons"
 
 const getAll = () => {
-    const promise = axios.get("http://localhost:3001/persons")
+    const promise = axios.get(baseURL)
     return promise.then(response => response.data)
 }
 
 const addPerson = (newPerson) => {
-    const promise = axios.post("http://localhost:3001/persons", newPerson)
+    const promise = axios.post(baseURL, newPerson)
     return promise.then(response => response.data)
 }
 
 const deletePerson = (id) => {
-    const promise = axios.delete(`http://localhost:3001/persons/${id}`)
+    const promise = axios.delete(`${baseURL}/${id}`)
     return promise.then(response => response.data)
 }
 
 const updateNumber = (id, changedPerson) => {
-    const promise = axios.put(`http://localhost:3001/persons/${id}`, changedPerson).catch((err) => {
+    const promise = axios.put(`${baseURL}/${id}`, changedPerson).catch((err) => {
         return {"data":"404"}
     })
     return promise.then(response => response.data)

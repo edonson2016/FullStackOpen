@@ -1,9 +1,10 @@
 POST http://localhost:3003/api/blogs
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkVkd2FyZCIsImlkIjoiNjZhOTQ0YzUwNzlhMjAyMjQ4Y2RhYjU1IiwiaWF0IjoxNzIyMzc5MzE3fQ.6pveMOMAceG9vcxxjV0LBskeyCyGVeDjzzwiDSRnPBw
 
 {
-    "title": "ross",
-    "author": "rick",
+    "title": "token",
+    "author": "token",
     "url": "url",
     "likes": 0
 }

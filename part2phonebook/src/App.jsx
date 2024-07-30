@@ -3,7 +3,6 @@ import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
 import Persons from './components/Persons'
 import Notification from './components/Notification'
-import axios from 'axios'
 import personServices from './services/personServices'
 
 const App = () => {
@@ -46,7 +45,6 @@ const App = () => {
     const newPerson = {
       name: newName,
       number: newNumber,
-      id: Math.floor(Math.random() * 1100).toString()
     }
     console.log(nameList.includes(newName))
     if (nameList.includes(newName) === false) {
@@ -62,6 +60,10 @@ const App = () => {
           setTimeout(() => {
             setAddMessage(null)
           }, 5000)
+        }).catch(error => {
+          setNewName("")
+          setNewNumber("")
+          setAddMessage(error.message)
         })
     } else {
       const dupID = persons.find(person => person.name === newName).id
@@ -77,6 +79,8 @@ const App = () => {
             setAddMessage(null)
           }, 5000)
           } else {
+            console.log(data)
+
             const newList = persons.filter((person) => person.name != newName)
           setPersons(newList.concat(data))
           setNewName("")
@@ -102,10 +106,10 @@ const App = () => {
     const deletedPerson = persons.find((person) => person.id == id)
     console.log(deletedPerson)
     if (window.confirm(`Delete ${deletedPerson.name}`)) {
-          personServices.deletePerson(id).then(deletedPerson =>
+          personServices.deletePerson(id).then(deleted =>
       { 
+        const newPersons = persons.filter((person) => person.id !== deletedPerson.id)
         console.log(deletedPerson)
-        const newPersons = persons.filter(person => person.id != deletedPerson.id)
         setPersons(newPersons)
       }
     )
